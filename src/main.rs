@@ -19,7 +19,7 @@ enum LidState {
     Closed
 }
 
-fn read_charger_state() -> Result<(ChargerState), Box<dyn Error>> {
+fn read_charger_state() -> Result<ChargerState, Box<dyn Error>> {
   let contents = fs::read_to_string("/sys/class/power_supply/AC0/online")?;
   match contents.trim().parse::<i32>().unwrap() {
       1 => Ok(ChargerState::Plugged),
